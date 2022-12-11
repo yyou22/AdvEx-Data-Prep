@@ -1,6 +1,6 @@
 from __future__ import print_function
 from cifar10_models.vgg import vgg16_bn, vgg19_bn
-from cifar10_models.resnet import resnet18
+from cifar10_models.resnet import resnet18, resnet34
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -243,11 +243,9 @@ def attack(model, X_data, Y_data):
 def main():
 
 	if args.model == "resnet":
-		model = resnet18(pretrained=True)
-		#model = ResNet18()
-		#model.load_state_dict(torch.load("./resnet/model-wideres-epoch100.pt", map_location=torch.device('cpu')))
+		model = resnet34(pretrained=True)
 	elif args.model == "TRADES":
-		model = ResNet18()
+		model = ResNet34()
 		model.load_state_dict(torch.load("./resnet/model-advres-epoch200.pt", map_location=torch.device('cpu')))
 
 	X_data = np.load("../data/X.npy")
